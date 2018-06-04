@@ -97,6 +97,14 @@ class ComenziController extends Controller
         $comanda = Comenzi::find($id);
         $comanda->delete();
 
+    }
+
+    public function getRecordIsOrder() {
+        $route = Comenzi::where('is_asigned', 1)->get();
+
+
+        return response($route->toArray())
+            ->header('Content-Type', 'text/plain');
 
     }
 }

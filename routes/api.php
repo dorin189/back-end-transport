@@ -96,7 +96,17 @@ Route::group(
             'delete/{id}',
             '\App\Http\Controllers\Comenzi\ComenziController@remove'
         );
+        Route::get(
+            '/is-order',
+            '\App\Http\Controllers\Comenzi\ComenziController@getRecordIsOrder'
+        );
     }
 );
+
+Route::post(
+    '/test',
+    '\App\Http\Controllers\SendEmailController@send'
+);
+
 
 
