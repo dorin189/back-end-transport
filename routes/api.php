@@ -66,6 +66,10 @@ Route::group(
             '/',
             '\App\Http\Controllers\ParcAuto\ParcAutoController@store'
         );
+        Route::get(
+            '/info',
+            '\App\Http\Controllers\Soferi\SoferiController@getSoferiName'
+        );
     }
 );
 
@@ -79,6 +83,18 @@ Route::group(
         Route::post(
             '/',
             '\App\Http\Controllers\Comenzi\ComenziController@store'
+        );
+        Route::get(
+            '/info',
+            '\App\Http\Controllers\Comenzi\ComenziController@getComandsNotFullModel'
+        );
+        Route::post(
+            '/update',
+            '\App\Http\Controllers\Comenzi\ComenziController@update'
+        );
+        Route::delete(
+            'delete/{id}',
+            '\App\Http\Controllers\Comenzi\ComenziController@remove'
         );
     }
 );

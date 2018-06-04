@@ -11,19 +11,43 @@ namespace App\Http\Controllers\Comenzi;
 
 use App\Comenzi;
 use App\Http\Controllers\Controller;
+use App\Soferi;
 use Illuminate\Http\Request;
 
 class ComenziController extends Controller
 {
+    /**
+     * @return mixed
+     */
     public function getAll()
     {
+        $comands = Comenzi::all();
+        $soferi = Soferi::all(
+            'nume',
+            'prenume'
+        );
+
+        $collection = collect();
+
+
+       $comands->map(function($comand) use ($soferi) {
+           $comand['soferi'] = $soferi->toArray();
+           return $comand;
+       });
+
+        return response($comands->toArray())
+            ->header('Content-Type', 'text/plain');
+
+    }
+
+    public function getComandsNotFullModel() {
         $transportatori = Comenzi::all(
             'adresa_client',
             'lat_adresa_client',
-            'lng_adresa_client'
-//            'adresa_destinatar',
-//            'lat_adresa_destinatar',
-//            'lng_adresa_destinatar'
+            'lng_adresa_client',
+            'adresa_destinatar',
+            'lat_adresa_destinatar',
+            'lng_adresa_destinatar'
         );
 
         return response($transportatori->toArray())
@@ -40,7 +64,7 @@ class ComenziController extends Controller
         ]);
 
         $coordonateClient = explode(' ', $request['coordonateContact']);
-        $coordonateDestinatar = explode(' ', $request['coordonateContact']);
+        $coordonateDestinatar = explode(' ', $request['coordonateDestinatar']);
 
         Comenzi::create([
             'nume_client' => $request['numeClient'],
@@ -56,5 +80,23 @@ class ComenziController extends Controller
             'nume_produs' => $request['numeProdus'],
             'dimensiune_produs' => $request['dimensiuneProdus']
         ]);
+    }
+
+
+    public function update(Request $request) {
+
+        $comanda = Comenzi::find($request['id']);
+        $comanda->is_asigned = $request['is_asigned'];
+        $comanda->nume_sofer = $request['nume_sofer'];
+        $comanda->save();
+
+    }
+
+    public function remove($id)
+    {
+        $comanda = Comenzi::find($id);
+        $comanda->delete();
+
+
     }
 }

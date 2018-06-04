@@ -21,4 +21,16 @@ class SoferiController extends Controller
         return response($soferi)
             ->header('Content-Type', 'text/plain');
     }
+
+
+    public function getSoferiName()
+    {
+        $soferi = Soferi::all(
+            'nume',
+            'prenume'
+        );
+
+          return response($soferi->toArray())
+              ->header('Content-Type', 'text/plain');
+    }
 }
