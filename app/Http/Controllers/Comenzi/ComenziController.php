@@ -110,7 +110,12 @@ class ComenziController extends Controller
 
     public function getRecordIsOrder() {
 
-        $route = Soferi::with('comenziAsigned')->select('id','nume','prenume')->get();
+        $route = Soferi::with('comenziAsigned', 'parc')->select('id','nume','prenume', 'email')->get();
+
+//        $parc = Soferi::with('parc')->get();
+
+        \Log::info($route);
+
 //        $route = ComenziAsigned::with('sofer')->get();
 
 //        \Log::info($route);
@@ -125,6 +130,7 @@ class ComenziController extends Controller
 
     public function getComenzi(int $id) {
         $comenziAsigned = ComenziAsigned::with('comand')->where('sofer_id', $id)->get();
+
 
         return response($comenziAsigned->toArray())
             ->header('Content-Type', 'text/plain');

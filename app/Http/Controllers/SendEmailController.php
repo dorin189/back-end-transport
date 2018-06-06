@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Mail\RutaTransportSofer;
+use App\ParcAuto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,6 +19,12 @@ class SendEmailController extends Controller
 
     public function send(Request $request)
     {
-        Mail::to('iosifescu.dorin@gmail.com')->send(new RutaTransportSofer($request['link']));
+        ParcAuto::where(
+            'soferi_id', $request['driverId'])
+            ->update(['revizie' => $request['revizie']]);
+
+
+        Mail::to($request['email'])
+            ->send(new RutaTransportSofer($request['linkMap']));
     }
 }
