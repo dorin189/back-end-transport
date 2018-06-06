@@ -14,4 +14,8 @@ class Soferi extends Model
     {
         return $this->hasOne(ParcAuto::class);
     }
+
+    public function comenziAsigned() {
+        return $this->hasOne(ComenziAsigned::class, 'sofer_id');
+    }
 }

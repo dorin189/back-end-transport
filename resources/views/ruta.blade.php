@@ -261,7 +261,7 @@
                                 <tr>
                                     <td>
                                         <p>Salut,</p>
-                                        <p>Atasat ai link-ul pentru google maps.</p>
+                                        <p>Atasat aveti link-ul pentru google maps.</p>
                                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                             <tbody>
                                             <tr>
@@ -269,7 +269,9 @@
                                                     <table border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td> <a href="https://maps.google.com/maps?ll=45.801101,26.800906&z=7&t=m&hl=en&gl=US&mapclient=embed&saddr=Gama%20residence%201%2C%20Pope%C8%99ti-Leordeni%20077160&daddr=Bulevardul%20Independen%C8%9Bei%201%2C%20Ia%C8%99i%20700259+to:Strada%20Bra%C8%99ovului%207%2C%20Prejmer%20507165&dirflg=d" target="_blank">Traseu</a> </td>
+                                                            <td> <a href="{{$link}}" target="_blank">Traseu</a> </td>
+                                                        </tr>
+                                                        <tr>
                                                         </tr>
                                                         </tbody>
                                                     </table>

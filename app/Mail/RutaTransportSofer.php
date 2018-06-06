@@ -10,15 +10,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class RutaTransportSofer extends Mailable
 {
     use Queueable, SerializesModels;
+    /**
+     * @var string
+     */
+    private $link;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $link)
     {
-        //
+
+        $this->link = $link;
     }
 
     /**
@@ -28,7 +33,7 @@ class RutaTransportSofer extends Mailable
      */
     public function build()
     {
-        return $this->from('iosifescu.dorin@gmail.com')
-                    ->view('ruta');
+        return $this->from('info@transportator.ro')
+                    ->view('ruta',['link'=> $this->link]);
     }
 }

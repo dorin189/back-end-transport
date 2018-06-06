@@ -10,14 +10,14 @@ namespace App\Http\Controllers;
 
 
 use App\Mail\RutaTransportSofer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailController extends Controller
 {
 
-    public function send()
+    public function send(Request $request)
     {
-        \Log::info("here");
-        Mail::to('iosifescu.dorin@gmail.com')->send(new RutaTransportSofer());
+        Mail::to('iosifescu.dorin@gmail.com')->send(new RutaTransportSofer($request['link']));
     }
 }

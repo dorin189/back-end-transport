@@ -100,6 +100,10 @@ Route::group(
             '/is-order',
             '\App\Http\Controllers\Comenzi\ComenziController@getRecordIsOrder'
         );
+        Route::get(
+            '/get-comenzi/{id}',
+            '\App\Http\Controllers\Comenzi\ComenziController@getComenzi'
+        );
     }
 );
 

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Comenzi;
 
 
 use App\Comenzi;
+use App\ComenziAsigned;
 use App\Http\Controllers\Controller;
 use App\Soferi;
 use Illuminate\Http\Request;
@@ -23,11 +24,10 @@ class ComenziController extends Controller
     {
         $comands = Comenzi::all();
         $soferi = Soferi::all(
+            'id',
             'nume',
             'prenume'
         );
-
-        $collection = collect();
 
 
        $comands->map(function($comand) use ($soferi) {
@@ -84,12 +84,21 @@ class ComenziController extends Controller
 
 
     public function update(Request $request) {
-
         $comanda = Comenzi::find($request['id']);
         $comanda->is_asigned = $request['is_asigned'];
         $comanda->nume_sofer = $request['nume_sofer'];
-        $comanda->save();
 
+        $sofer = Soferi::find($request['sofer_id']);
+
+
+
+        ComenziAsigned::create([
+           'sofer_id' => $sofer->id,
+           'comenzi_id' => $comanda->id
+        ]);
+
+
+        $comanda->save();
     }
 
     public function remove($id)
@@ -100,11 +109,24 @@ class ComenziController extends Controller
     }
 
     public function getRecordIsOrder() {
-        $route = Comenzi::where('is_asigned', 1)->get();
+
+        $route = Soferi::with('comenziAsigned')->select('id','nume','prenume')->get();
+//        $route = ComenziAsigned::with('sofer')->get();
+
+//        \Log::info($route);
+
+//        $route = Comenzi::where('is_asigned', 1)->get();
 
 
         return response($route->toArray())
             ->header('Content-Type', 'text/plain');
 
+    }
+
+    public function getComenzi(int $id) {
+        $comenziAsigned = ComenziAsigned::with('comand')->where('sofer_id', $id)->get();
+
+        return response($comenziAsigned->toArray())
+            ->header('Content-Type', 'text/plain');
     }
 }

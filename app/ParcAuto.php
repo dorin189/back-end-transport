@@ -17,4 +17,6 @@ class ParcAuto extends Model
     public function soferi() {
         return $this->belongsTo(Soferi::class);
     }
+
+
 }
