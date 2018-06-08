@@ -112,5 +112,19 @@ Route::post(
     '\App\Http\Controllers\SendEmailController@send'
 );
 
+Route::group(
+    ['prefix' => 'dashboard'],
+    function() {
+        Route::get(
+            '/revizie',
+            '\App\Http\Controllers\Dashboard\DashboardController@getRevizie'
+        );
+        Route::get(
+            '/soferi',
+            '\App\Http\Controllers\Dashboard\DashboardController@getSoferi'
+        );
+    }
+);
+
 
 

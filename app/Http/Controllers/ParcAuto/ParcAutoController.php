@@ -33,9 +33,6 @@ class ParcAutoController
             'fabricatie' => 'required'
         ]);
 
-
-        \Log::info($request);
-
         ParcAuto::create([
             'denumire_auto' => $request['nume'],
             'numar_inmatriculare' => $request['numar'],
