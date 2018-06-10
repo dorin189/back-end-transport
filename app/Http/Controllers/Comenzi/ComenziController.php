@@ -47,7 +47,8 @@ class ComenziController extends Controller
             'lng_adresa_client',
             'adresa_destinatar',
             'lat_adresa_destinatar',
-            'lng_adresa_destinatar'
+            'lng_adresa_destinatar',
+            'is_asigned'
         );
 
         return response($transportatori->toArray())
